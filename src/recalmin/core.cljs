@@ -24,7 +24,7 @@
    [bar]
    [error-boundary [foo]]])
 
-(reagent/render-component (fn [] [error-boundary [root]])
+(reagent/render-component [(fn [] [error-boundary [root]])]
                           (. js/document (getElementById "app")))
 
 (defn on-js-reload []
