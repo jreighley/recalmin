@@ -16,7 +16,7 @@
 (defn svg [attrs boxes img]
   [:svg
    (merge-with merge attrs
-               {:width 800 :height 800
+               {:width 812 :height 609
                 :stroke "black"
                 :fill "none"
                 :style {:border "1px solid"
@@ -42,7 +42,7 @@
         end-box
         (fn [e]
           (when @pen-down?
-            (swap! boxes conj [@start-xy (xy e)])
+            (swap! boxes conj [@start-xy (xy e) (random-uuid)])
             (reset! pen-down? false)))]
   {:on-mouse-down start-box
    :on-mouse-over start-box
@@ -53,13 +53,15 @@
   [:table
    [:thead
     [:tr
+     [:td "BoxName"]
      [:td "x1"]
      [:td "y1"]
      [:td "x2"]
      [:td "y2"]]]
    [:tbody
-    (for [[[x1 y1] [x2 y2]] @boxes]
+    (for [[[x1 y1] [x2 y2] boxname] @boxes]
       [:tr
+       [:td boxname]
        [:td x1]
        [:td y1]
        [:td x2]
